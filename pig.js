@@ -216,6 +216,16 @@ document.getElementById('down').addEventListener('mouseup', () => {
     dropStart = false;
 });
 
+document.getElementById('down').addEventListener('touchstart', (event) => {
+    event.preventDefault();
+    dropStart = true;
+}, { passive: false });
+
+document.getElementById('down').addEventListener('touchend', (event) => {
+    event.preventDefault();
+    dropStart = false;
+}, { passive: false });
+
 document.getElementById('up').addEventListener('click', () => {
     playerRotate(1);
 });
@@ -249,7 +259,7 @@ document.addEventListener('touchstart', function (event) {
 let lastTouchEnd = 0;
 document.addEventListener('touchend', function (event) {
     const now = (new Date()).getTime();
-    if (now - lastTouchEnd <= 500) {
+    if (now - lastTouchEnd <= 300) {
         event.preventDefault();
     }
     lastTouchEnd = now;
