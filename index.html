@@ -10,40 +10,48 @@
             flex-direction: column;
             align-items: center;
             height: 100vh;
-            background-color: rgb(50,50,50);
+            background-color: rgb(50, 50, 50);
             color: white;
             font-family: Arial, sans-serif;
             margin: 0;
         }
+
         #game-container {
             text-align: center;
         }
+
         canvas {
             border: 2px solid #ffffff;
             background-color: #000;
             display: block;
             margin: 0 auto;
+            width: 210px; /* 70% of 300px */
+            height: 420px; /* 70% of 600px */
         }
+
         #score {
-            font-size: 1.5em;
-            margin-top: 20px; /* Increased margin-bottom to move the score down */
+            font-size: 1.05em; /* 70% of 1.5em */
+            margin-top: 20px;
             margin-bottom: 15px;
             color: #ffffff;
         }
+
         .controls {
             margin-top: 20px;
         }
+
         .controls .row {
             display: flex;
             justify-content: center;
             margin: 5px;
         }
+
         .controls button {
-            font-size: 3em;
-            margin: 20px;
+            font-size: 2.1em; /* 70% of 3em */
+            margin: 14px; /* 70% of 20px */
             padding: 0;
-            width: 0.5em;
-            height: 0.5em;
+            width: 0.35em; /* 70% of 0.5em */
+            height: 0.35em; /* 70% of 0.5em */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -51,20 +59,20 @@
     </style>
 </head>
 <body>
-    <div id="game-container">
-        <div id="score">Score: 0</div>
-        <canvas id="tetris" width="300" height="600"></canvas>
-        <div class="controls">
-            <div class="row">
-                <button id="left">⬅️</button>
-                <button id="right">➡️</button>
-            </div>
-            <div class="row">
-                <button id="up">⬆️</button>
-                <button id="down">⬇️</button>
-            </div>
+<div id="game-container">
+    <div id="score">Score: 0</div>
+    <canvas id="tetris" width="300" height="600"></canvas>
+    <div class="controls">
+        <div class="row">
+            <button id="left">⬅️</button>
+            <button id="right">➡️</button>
+        </div>
+        <div class="row">
+            <button id="up">⬆️</button>
+            <button id="down">⬇️</button>
         </div>
     </div>
-    <script src="pig.js"></script>
+</div>
+<script src="pig.js"></script>
 </body>
 </html>
