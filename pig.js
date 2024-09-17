@@ -110,6 +110,7 @@ function playerReset() {
         arena.forEach(row => row.fill(0));
         player.score = 0;
         updateScore();
+        dropInterval = 1000; // Reset drop interval
     }
 }
 
@@ -185,8 +186,12 @@ function updateScore() {
 let lastTime = 0;
 let dropCounter = 0;
 let dropStart = false;
-let dropInterval = 1000;
+let dropInterval = 500;
 let fastDropInterval = 15; // Adjusted for slower dropping
+
+function calculateDropInterval(score) {
+    return 1000 / Math.pow(2, Math.floor(score / 30));
+}
 
 function playerDrop() {
     player.pos.y++;
@@ -196,6 +201,7 @@ function playerDrop() {
         playerReset();
         arenaSweep();
         updateScore();
+        dropInterval = calculateDropInterval(player.score); // Update drop interval based on score
     }
     dropCounter = 0;
 }
