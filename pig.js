@@ -240,20 +240,35 @@ document.addEventListener('keyup', event => {
     }
 });
 
-// document.addEventListener('touchstart', function (event) {
-//     if (event.touches.length > 1) {
-//         event.preventDefault();
-//     }
-// }, {passive: false});
-//
-// let lastTouchEnd = 0;
-// document.addEventListener('touchend', function (event) {
-//     const now = (new Date()).getTime();
-//     if (now - lastTouchEnd <= 100) {
-//         event.preventDefault();
-//     }
-//     lastTouchEnd = now;
-// }, false);
+document.addEventListener('touchstart', function (event) {
+    if (event.touches.length > 1) {
+        event.preventDefault();
+    }
+}, {passive: false});
+
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function (event) {
+    const now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 500) {
+        event.preventDefault();
+    }
+    lastTouchEnd = now;
+}, false);
+
+function simulateClick(event) {
+    event.preventDefault();
+    const clickEvent = new MouseEvent('click', {
+        view: window,
+        bubbles: true,
+        cancelable: true
+    });
+    event.target.dispatchEvent(clickEvent);
+}
+
+const buttons = document.querySelectorAll('button');
+buttons.forEach(button => {
+    button.addEventListener('touchstart', simulateClick, { passive: false });
+});
 
 function update(time = 0) {
     const deltaTime = time - lastTime;
