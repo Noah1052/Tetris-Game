@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Tetris 1.1</title>
+    <title>Tetris 1.2</title>
     <style>
         body {
             display: flex;
@@ -37,21 +37,23 @@
         }
 
         .controls {
-            margin-top: 20px;
+            width: 210px; /* Match the width of the canvas */
+            margin: 0 auto; /* Center the controls */
         }
 
         .controls .row {
             display: flex;
-            justify-content: center;
-            margin: 5px;
+            justify-content: space-between;
+            width: 100%;
+            padding: 10px 0; /* Remove padding */
         }
 
         .controls button {
-            font-size: 2.1em; /* 70% of 3em */
-            margin: 14px; /* 70% of 20px */
+            font-size: 3em;
+            margin: 0; /* Remove margin */
             padding: 0;
-            width: 0.35em; /* 70% of 0.5em */
-            height: 0.35em; /* 70% of 0.5em */
+            width: 50%; /* Each button takes half the width of the row */
+            height: 1em; /* Adjust height as needed */
             display: flex;
             align-items: center;
             justify-content: center;
