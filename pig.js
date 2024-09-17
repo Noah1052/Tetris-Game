@@ -208,6 +208,15 @@ document.getElementById('right').addEventListener('click', () => {
     playerMove(1);
 });
 
+document.getElementById('up').addEventListener('click', () => {
+    playerRotate(1);
+});
+
+document.getElementById('up').addEventListener('touchstart', (event) => {
+    event.preventDefault();
+    playerRotate(1);
+}, {passive: false});
+
 document.getElementById('down').addEventListener('mousedown', () => {
     dropStart = true;
 });
@@ -219,12 +228,12 @@ document.getElementById('down').addEventListener('mouseup', () => {
 document.getElementById('down').addEventListener('touchstart', (event) => {
     event.preventDefault();
     dropStart = true;
-}, { passive: false });
+}, {passive: false});
 
 document.getElementById('down').addEventListener('touchend', (event) => {
     event.preventDefault();
     dropStart = false;
-}, { passive: false });
+}, {passive: false});
 
 document.addEventListener('keydown', event => {
     if (event.key === 'ArrowLeft') {
@@ -273,7 +282,7 @@ function simulateClick(event) {
 
 const buttons = document.querySelectorAll('button');
 buttons.forEach(button => {
-    button.addEventListener('touchstart', simulateClick, { passive: false });
+    button.addEventListener('touchstart', simulateClick, {passive: false});
 });
 
 function update(time = 0) {
