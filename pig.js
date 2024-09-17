@@ -212,10 +212,10 @@ document.getElementById('up').addEventListener('click', () => {
     playerRotate(1);
 });
 
-document.getElementById('up').addEventListener('touchstart', (event) => {
-    event.preventDefault();
-    playerRotate(1);
-}, {passive: false});
+// document.getElementById('up').addEventListener('touchstart', (event) => {
+//     event.preventDefault();
+//     playerRotate(1);
+// }, {passive: false});
 
 document.getElementById('down').addEventListener('mousedown', () => {
     dropStart = true;
