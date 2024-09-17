@@ -226,10 +226,6 @@ document.getElementById('down').addEventListener('touchend', (event) => {
     dropStart = false;
 }, { passive: false });
 
-document.getElementById('up').addEventListener('click', () => {
-    playerRotate(1);
-});
-
 document.addEventListener('keydown', event => {
     if (event.key === 'ArrowLeft') {
         playerMove(-1);
