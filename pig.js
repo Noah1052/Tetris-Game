@@ -189,6 +189,12 @@ let dropStart = false;
 let dropInterval = 500;
 let fastDropInterval = 15; // Adjusted for slower dropping
 
+let moveLeftStart = false;
+let moveRightStart = false;
+let moveLeftInterval;
+let moveRightInterval;
+let moveInterval = 50; // Interval for continuous movement in milliseconds
+
 function calculateDropInterval(score) {
     return 1000 / Math.pow(2, Math.floor(score / 30));
 }
@@ -206,13 +212,57 @@ function playerDrop() {
     dropCounter = 0;
 }
 
-document.getElementById('left').addEventListener('click', () => {
-    playerMove(-1);
+document.getElementById('left').addEventListener('mousedown', () => {
+    moveLeftStart = true;
+    moveLeftInterval = setInterval(() => {
+        playerMove(-1);
+    }, moveInterval);
 });
 
-document.getElementById('right').addEventListener('click', () => {
-    playerMove(1);
+document.getElementById('left').addEventListener('mouseup', () => {
+    moveLeftStart = false;
+    clearInterval(moveLeftInterval);
 });
+
+document.getElementById('left').addEventListener('touchstart', (event) => {
+    event.preventDefault();
+    moveLeftStart = true;
+    moveLeftInterval = setInterval(() => {
+        playerMove(-1);
+    }, moveInterval);
+}, {passive: false});
+
+document.getElementById('left').addEventListener('touchend', (event) => {
+    event.preventDefault();
+    moveLeftStart = false;
+    clearInterval(moveLeftInterval);
+}, {passive: false});
+
+document.getElementById('right').addEventListener('mousedown', () => {
+    moveRightStart = true;
+    moveRightInterval = setInterval(() => {
+        playerMove(1);
+    }, moveInterval);
+});
+
+document.getElementById('right').addEventListener('mouseup', () => {
+    moveRightStart = false;
+    clearInterval(moveRightInterval);
+});
+
+document.getElementById('right').addEventListener('touchstart', (event) => {
+    event.preventDefault();
+    moveRightStart = true;
+    moveRightInterval = setInterval(() => {
+        playerMove(1);
+    }, moveInterval);
+}, {passive: false});
+
+document.getElementById('right').addEventListener('touchend', (event) => {
+    event.preventDefault();
+    moveRightStart = false;
+    clearInterval(moveRightInterval);
+}, {passive: false});
 
 document.getElementById('up').addEventListener('click', () => {
     playerRotate(1);
@@ -237,10 +287,16 @@ document.getElementById('down').addEventListener('touchend', (event) => {
 }, {passive: false});
 
 document.addEventListener('keydown', event => {
-    if (event.key === 'ArrowLeft') {
-        playerMove(-1);
-    } else if (event.key === 'ArrowRight') {
-        playerMove(1);
+    if (event.key === 'ArrowLeft' && !moveLeftStart) {
+        moveLeftStart = true;
+        moveLeftInterval = setInterval(() => {
+            playerMove(-1);
+        }, moveInterval);
+    } else if (event.key === 'ArrowRight' && !moveRightStart) {
+        moveRightStart = true;
+        moveRightInterval = setInterval(() => {
+            playerMove(1);
+        }, moveInterval);
     } else if (event.key === 'ArrowDown') {
         dropStart = true;
     } else if (event.key === 'q') {
@@ -251,7 +307,13 @@ document.addEventListener('keydown', event => {
 });
 
 document.addEventListener('keyup', event => {
-    if (event.key === 'ArrowDown') {
+    if (event.key === 'ArrowLeft') {
+        moveLeftStart = false;
+        clearInterval(moveLeftInterval);
+    } else if (event.key === 'ArrowRight') {
+        moveRightStart = false;
+        clearInterval(moveRightInterval);
+    } else if (event.key === 'ArrowDown') {
         dropStart = false;
     }
 });
